@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Interface</title>
+    <link rel="stylesheet" href="styles.css">
+ <style>
+        /* General Body Style */
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f5f5f5; /* Light gray background */
+            background-image: url('bg.jpg'); /* Add your background image */
+            background-size: cover; /* Ensure the image covers the whole background */
+            background-position: center; /* Center the background image */
+        }
+
+        /* Chat Container */
+        .chat-container {
+            background-color: #ffffff; /* White background for chat */
+            width: 375px; /* iPhone width */
+            height: 667px; /* iPhone height */
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+            padding: 20px; /* Padding around the chat container */
+        }
+/* Chat Header */
+.chat-header {
+    background-color:#CCCCFF; /* Header background color */
+    padding: 15px 20px; /* Padding for spacing */
+    display: flex;
+    align-items: center;
+    color: white;
+    border-bottom: 2px solid #CCCCFF; /* Slightly darker border for contrast */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+    position: relative; /* Ensures proper positioning of elements */
+    flex-direction: column; /* Stack elements vertically */
+}
+.logo {
+    width: 50px; /* Adjust size as needed */
+    height: auto;
+    margin-bottom: 10px; /* Space below the logo */
+}
+.bot-avatar {
+    width: 50px; /* Increase size if necessary */
+    height: 50px; /* Increase size if necessary */
+    margin-bottom: 10px; /* Space below the avatar */
+    border-radius: 50%;
+    border: 2px solid #ffffff; /* White border for contrast */
+    object-fit: cover; /* Ensures the image covers the element without distortion */
+}
+.pin-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    margin-left: 10px; /* Adjust space between the message and pin icon */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pin-button img {
+    width: 16px; /* Make sure the icon size is appropriate */
+    height: 16px;
+}
+
+
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+
+        <div class="chat-header">
+
+            
+            <div class="header-text">
+
+                <p><br><br><img src="bot.png" alt="Bot Avatar" class="bot-avatar" style="width: 24px; height: 24px; object-fit: contain;" class="bot-avatar">
+Trend teller</p>
+            </div>
+        </div>
+        <div class="chat-box" id="chat-box">
+            <!-- Chat messages will be dynamically added here -->
+        </div>
+        <div class="input-container">
+            <input type="text" id="user-input" placeholder="Type a message...">
+            <button onclick="sendMessage()">
+                <img style="width: 24px; height: 24px; object-fit: contain;" src="send.png" alt="Send">
+            </button>
+
+        </div>
+<div class="message user">
+    This is a user message.
+    <button class="pin-button" style="border: none; background: none;">
+        <img src="pin-icon.png" alt="Pin" style="width: 16px; height: 16px;">
+    </button>
+</div>
+
+        <div class="quick-replies" id="quick-replies">
+            <!-- Quick reply buttons -->
+        </div>
+    </div>
+
+    <script src="script.js">
+function addMessage(message, type, messageId = null) {
+    const chatBox = document.getElementById('chat-box');
+    const messageElement = document.createElement('div');
+    messageElement.className = message ${type};
+    messageElement.innerText = message;
+
+    if (messageId) {
+        messageElement.dataset.messageId = messageId;
+    }
+
+    // Add a pin button
+    const pinButton = document.createElement('button');
+    pinButton.className = 'pin-button';
+    pinButton.onclick = () => pinMessage(message, messageId);
+
+    // Add the pin icon
+    const pinIcon = document.createElement('img');
+    pinIcon.src = 'pin-icon.png'; // Ensure this path is correct
+    pinIcon.alt = 'Pin';
+    pinIcon.style.width = '16px'; // Adjust the size
+    pinIcon.style.height = '16px';
+
+    pinButton.appendChild(pinIcon);
+    messageElement.appendChild(pinButton);
+
+    chatBox.appendChild(messageElement);
+    chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the bottom
+}
+</script>
+</body>
+</html>
+index.html
